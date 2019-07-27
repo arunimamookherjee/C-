@@ -1,0 +1,121 @@
+//INSERTION IN ARRAY
+
+#include<iostream.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<process.h>
+#include<stdio.h>
+
+class hospital
+{
+char name[20];
+int patient_id;
+public:
+
+	int get_patientid()//ACECSSOR FUNCTION TO GET patient_id
+	{	return patient_id; }
+
+	void get_input()
+	{
+	char ch;
+
+	cout<<"\nNAME : ";   gets(name);
+	cout<<"\nPATIENT ID : "; cin>>patient_id;
+	}
+	void display()
+	{
+	cout<<"\nPATIENT ID : ";cout<<patient_id;
+	cout<<"\nNAME	    : ";cout<<name;
+	}
+
+
+}; //CLASS DEFINITION OVER
+
+
+int FindPos(hospital hosp[],int size,int ins_id)
+//FUNCTION TO DETERMINE POSITION OF THE NEW ELEMENT BASED ON ITS partient_id i.e ins_id
+{
+	int pos;
+
+	if(ins_id<comp[0].get_patientid())
+		pos=0;
+	else
+	{
+		for(int i=0;i<size-1;i++)
+		{
+			if(hosp[i].get_patientid()<=ins_id&&ins_id<hosp[i+1].get_patientid())
+			{
+				pos=i+1;
+				break;
+			}
+		}
+		if(i==size-1)
+			pos=size;
+	}
+	return pos;
+}
+
+void main()
+{
+	clrscr();
+
+	hospital hosp[50],ins_hosp;
+	//ARRAY OF OBJECTS OF CLASS 'HOSPITAL' ( CAN HOLD MAX 50 ELEMENTS )
+	int item,n,index;
+	char ch='y';
+
+	cout<<"Enter desired array size (max. 50)...";
+	cin>>n;
+
+	cout<<"\nEnter records in ascending order of order no \n"<<endl;
+
+	for(int i=0;i<n;i++)
+	{
+		hosp[i].get_input();//TO GET INPUT
+		cout<<endl;
+	}
+
+	while(ch=='y'||ch=='Y')
+	{
+		cout<<"\nEnter Record to be inserted..."<<endl<<endl;
+		ins_hosp.get_input();//TO GET INPUT FOR RECORD TO BE INSERTED
+
+		if(n==50)//TO CHECK IF ARRAY IS FULL
+		{
+			cout<<"Overflow!!\n";
+			exit(1);
+		}
+
+		index=FindPos(hosp,n,ins_hosp.get_patientid());
+		//TO GET RIGHT INDEX OF ELEMENT TO BE INSERTED IN ARRAY
+
+		for(i=n;i>index;i--)
+		{
+			hosp[i]=hosp[i-1];//TO SHIFT ELEMENTS TO MAKE ROOM FOR NEW ELEMENT
+		}
+
+		hosp[index]=ins_hosp;//TO INSERT ELEMENT
+
+		n=n+1;//TO UPDATE NO OF ELEMENTS
+
+		cout<<"\nWant to insert more elements ? (y/n)..";
+		cin>>ch;
+
+	}
+
+	cout<<"The array now is...\n"<<endl;
+
+	for(i=0;i<n;i++)
+	{
+		hosp[i].display();//TO DISPLAY RECORD
+		cout<<endl;
+	}
+
+	getch();
+}
+
+
+
+
+
+

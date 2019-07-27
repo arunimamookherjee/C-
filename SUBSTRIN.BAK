@@ -1,0 +1,49 @@
+//TO DISPLAY SUBSTRING
+
+#include <iostream.h>
+#include <conio.h>
+
+void substring(char*word,int pos);
+//FUNCTION TO DISPLAY SUBSTRING FROM GIVEN  POSITION 'POS'
+void substring(char*hos,int pos)
+{
+	char hosp[100];
+	int j=0,i=pos-1;
+
+	while(hos[i]!='\0')
+	{
+		hosp[j]=hos [i];
+		i=i+1;
+		j=j+1;
+	}
+
+	hosp[j]='\0';
+
+	cout<<"Substring from "<<pos<<" position : "<<wordf;
+}
+
+void main ()
+{
+	clrscr ();
+	char hospital_name[100];
+	int flag;
+
+	cout<<"Enter word"<<endl;
+	cin.getline(hospital_name,100);
+
+	cout<<"Enter position"<<endl;
+	cin>>flag;
+
+	substring(hospital_name,flag);
+
+	getch ();
+}
+
+
+
+
+
+
+
+
+

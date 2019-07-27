@@ -1,0 +1,66 @@
+//LINEAR SEARCH;
+
+
+#include<iostream.h>
+#include<conio.h>
+#include<string.h>
+#include<stdio.h>
+
+class HOSPITAL
+{
+char name[20];
+public:
+	int patient_id;
+
+	void get_input()
+	{
+	char ch;
+
+	cout<<"\nNAME : ";   gets(name);
+	cout<<"\nPATIENT ID : "; cin>>patient_id;
+	}
+	void display()
+	{
+	cout<<"\nPATIENT ID : ";cout<<patient_id;
+	cout<<"\nNAME	    : ";cout<<name;
+	}
+}H[25];
+
+
+int Lsearch( HOSPITAL hos[],int size,int item);
+
+void main()
+{
+int n,index,item;
+clrscr();
+cout<<"ENTER DESIRED ARRAY SIZE (max 25);";
+cin>>n;
+cout<<"\nENTER ARRAY ELEMENTS :\n";
+for(int i=0 ;i<n;i++)
+{
+H[i].get_input();
+}
+cout<<"\nENTER PATIENT ID TO BE SEARCHED : ";
+cin>>item;
+index=Lsearch(H, n,item);
+if(index==-1)
+cout<<"\nELEMENT NOT FOUND!!!!!";
+else
+{	cout<<"\nELEMENT found ....";
+	H[index].display();
+}
+
+getch();
+
+}
+
+int Lsearch(HOSPITAL hos[],int size,int item)
+{
+    for(int i=0;i<size;i++)
+	{	if(hos[i].patient_id==item)
+	return i;
+	}
+
+	return -1;
+}
+

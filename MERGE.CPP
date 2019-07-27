@@ -1,0 +1,111 @@
+//MERGING IN ARRAYS
+
+#include<iostream.h>
+#include<conio.h>
+#include<string.h>
+#include<stdio.h>
+
+class hospital
+{
+char name[20];
+int patient_id;
+float TOT_BILL, consult_fees,meds;
+public:
+	void input()
+	{
+	char ch;
+	consult_fees=500;
+	clrscr();
+	cout<<"\nNAME : ";   gets(name);
+	cout<<"\nPATIENT ID : "; cin>>patient_id;
+	cout<<"\nTOTAL COST OF MEDICINE : ";cin>>meds;
+	TOT_BILL=meds+consult_fees;
+	}
+
+       void display()
+       {
+       cout<<"\nNAME	   : "<<name;
+       cout<<"\tPATIENT ID : "<<patient_id ;
+       cout<<"\n\n::::::::::::::::::::BILL::::::::::::::::";
+       cout<<"\nMEDICINE	: "<<meds;
+      cout<<"\nCONSULTING FEES : "<<consult_fees;
+       cout<<"\n		   ------------------\m";
+       cout<<"\nTOTAL BILL	: "<<TOT_BILL<<"\n\n";
+       }
+       int get_id()
+       {	return patient_id;    }
+};
+
+void merge(hospital A[],int m,hospital B[],int n,hospital C[])
+//FUNCTION FOR MERGING 2 ARRAYS
+{
+	int a,b,c;
+
+	for(a=0,b=n-1,c=0;a<m&&b>=0;)
+	{
+		if(A[a].get_id()<=B[b].get_id())
+		/* IF 'patient_id' OF ath ELEMENT OF 'A' <= 'patient_id' OF bth ELEMENT
+		   OF 'B' */
+			C[c++]=A[a++];
+		else
+			C[c++]=B[b--];
+	}
+
+	if(a<m)
+	{
+		while(a<m)
+			C[c++]=A[a++];
+	}
+	else
+	{
+		while(b>=0)
+			C[c++]=B[b--];
+	}
+}
+
+void main()
+{
+	 clrscr();
+
+	hospital A[50],B[50],C[100];
+	//ARRAYS OF OBJECTS OF CLASS 'HOSPITAL' ( CAN HOLD MAX 50 ELEMENTS )
+	int mn=0,m,n;
+
+	cout<<"Enter no. of elements in first array ;";
+	cin>>m;
+
+	cout<<endl<<"Enter Records in ascending order of RAM size ;"<<endl;
+	for(int i=0;i<m;i++)
+	{
+		A[i].input();//GET INPUT
+		cout<<endl;
+	}
+
+	cout<<endl<<"Enter no. of elements in second array:";
+	cin>>n;
+
+	mn=m+n;//'MN'='M'+'N', SIZE OF 'C'
+
+	cout<<endl<<"Enter records in descending order of RAM size ;"<<endl;
+	for(i=0;i<n;i++)
+	{
+		B[i].input();//GET INPUT
+		cout<<endl;
+	}
+
+	merge(A,m,B,n,C);//MERGE 'A' AND 'B' INTO 'C'
+
+	cout<<endl<<"The merged array"<<endl;
+
+	for(i=0;i<mn;i++)
+	{
+		C[i].display();//DISPLAY ELEMENT
+		cout<<endl;
+	}
+
+	getch();
+}
+
+
+
+

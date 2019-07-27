@@ -1,0 +1,105 @@
+//INSERTION IN BEGINNING OF LIST
+
+#include<iostream.h>
+#include<process.h>
+#include<conio.h>
+#include<stdio.h>
+
+struct hospital
+{
+char name[20];
+int patient_id;
+float TOT_BILL;
+hospital *next;
+}*start,*newptr,*save,*ptr,*rear;
+
+void input(hospital *hosp)//TO GET INPUT
+{
+		cout<<"Enter patient id : ";
+		cin>>hosp->patient_id;
+
+		cout<<"Enter name : ";
+		gets(hosp->name);
+
+		cout<<"Enter the Total Bill : ";
+		cin>>hosp->TOT_BILL;
+
+}
+void display(hospital *hosp)//TO DISPLAY RECORD
+{
+		cout<<"NAME OF PATIENT : "<<hosp->name<<endl;
+		cout<<"PATIENT ID"<<hosp->patient_id<<endl;
+		cout<<"TOTAL BILL "<<hosp->TOT_BILL<<endl;
+}
+
+
+
+
+
+hospital * create()//TO CREATE NODE
+{
+		ptr=new hospital;
+
+		cout<<"Enter Record "<<endl;
+		input(ptr);
+
+		ptr->next=NULL;
+
+		return ptr;
+}
+
+void insert(hospital *np)  //FUNCTION TO INSERT NODE
+{
+		if(start==NULL)
+			start=np;
+		else
+		{
+			save=start;
+			start=np;
+			np->next=save;
+		}
+}
+
+void displaylist(hospital *hosp) //FUNCTION TO DISPLAY LIST
+{
+	while(hosp!=NULL)
+	{
+		display(hosp);
+		cout<<endl;
+		hosp=hosp->next;
+	}
+	cout<<endl;
+}
+
+void main()
+{
+	clrscr();
+
+	start=rear=NULL;
+	char ch='y';
+
+	while(ch=='y'||ch=='Y')
+	{
+		newptr=create();
+
+		if(newptr==NULL)
+		{
+			cout<<"Cannot create ";
+			getch();
+			exit(1);
+		}
+
+		insert(newptr);
+
+		cout<<"Current list "<<endl;
+		displaylist(start);
+
+		cout<<"Do you want to insert more records "<<endl;
+		cin>>ch;
+	 }
+	 getch();
+}
+
+
+
+

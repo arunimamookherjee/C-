@@ -1,0 +1,107 @@
+//TO COPY DATA FROM ONE BINARY FILE TO ANOTHER
+
+#include<iostream.h>
+#include<conio.h>
+#include<fstream.h>
+#include<string.h>
+#include<stdio.h>
+
+class hospital
+{
+char name[20];
+int patient_id;
+float TOT_BILL,meds, noofdays, roomservice, OTcharges, consult_fees;
+public:
+       void calculate()
+       {
+       TOT_BILL=meds+roomservice+OTcharges+consult_fees;
+       }
+
+	void input()
+	{
+	char ch;
+	cout<<"\nNAME : ";   gets(name);
+	cout<<"\nPATIENT ID : "; cin>>patient_id;
+	cout<<"\nTOTAL COST OF MEDICINE : ";cin>>meds;
+	cout<<"\nWas the patient admitted : ";cin>>ch;
+	if(ch=='y'||ch=='Y')
+	{      	cout<<"\nNO. OF DAYS ADMITTED : "; cin>>noofdays;
+		roomservice=noofdays*800;
+
+	}
+		cout<<"\nWas the patient OPERATED : ";cin>>ch;
+	if(ch=='y'||ch=='Y')
+       {	OTcharges=7000; consult_fees=5000;	}
+	else
+       {	OTcharges=0; consult_fees=500;          }
+
+       calculate();
+       }
+
+
+       void display()
+       {
+       cout<<"\nNAME	   : "<<name;
+       cout<<"\tPATIENT ID : "<<patient_id ;
+       cout<<"\n\n::::::::::::::::::::BILL::::::::::::::::";
+       cout<<"\nMEDICINE	: "<<meds;
+       cout<<"\nROOM SERVICE    : "<<roomservice;
+       cout<<"\nOT CHARGES	: "<<OTcharges;
+       cout<<"\nCONSULTING FEES : "<<consult_fees;
+       cout<<"\n		   ------------------";
+       cout<<"\nTOTAL BILL	: "<<TOT_BILL;
+       }
+       void get_name(char patient_name)
+       { strcpy(name,patient_name);	}
+} ;
+
+
+void main()
+{
+	clrscr();
+
+	hospital hosp;
+	char name[30];
+	char ch='y';
+	ifstream fin;
+
+	ofstream fout("hosp_1.dat",ios::out|ios::binary);
+
+	fin.open("hospital.dat",ios::in|ios::binary);
+
+	while(!fin.eof())//AS LONG AS END OF FILE IS NOT REACHED
+	{
+		fin.read((char*)&hosp,sizeof(hosp));
+
+		if(fin.eof())//TO CHECK IF END OF FILE IS REACHED
+			break;
+		hosp.get_name(name)
+		if(!strcmp(name,"Aria")||!strcmp(name,"Aditi"))
+		 {
+		 fout.write((char*)&hosp,sizeof(hosp));
+		 hosp.display();//DISPLAY RECORD
+		 }
+		cout<<endl;
+	}
+
+	fin.close();//'FILE6.DAT' DISCONNECTED FROM INPUT STREAM 'FIN'
+
+	fout2.close();//'FILE66.DAT' DISCONNECTED FROM OUTPUT STREAM 'FOUT2'
+
+	cout<<"Records with operating system - \" windows 7 \" "<<endl<<endl;
+
+	fin.open("file66.dat",ios::in|ios::binary);//'FILE66.DAT' CONNECTED WITH INPUT STREAM 'FIN'
+
+	while(!fin.eof())//AS LONG AS END OF FILE IS NOT REACHED
+	{
+		fin.read((char*)&hosp,sizeof(hosp));//READ RECORD INTO OBJECT 'COMP'
+
+		if(fin.eof())//CHECK IF END OF FILE IS REACHED
+			break;
+
+		hosp.display();//DISPLAY RECORD
+		cout<<endl;
+	}
+
+	getch();
+}
